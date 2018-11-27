@@ -4,7 +4,6 @@ var bodyParser = require('body-parser');
 import moment from 'moment'
 
 const app = express()
-const port = 8080
 
 app.get('/list', function(req, res){
     request('https://www.sodexo.fi/ruokalistat/output/daily_json/124/'+ moment().format('Y')+'/' +  moment().format('M')  +'/'+ moment().format('D') +'/fi', function (error, response, body) {
@@ -15,4 +14,8 @@ app.get('/list', function(req, res){
 });
 })
 app.use(express.static(__dirname + '/my-app/build'));
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8080;
+}
+app.listen(port);
