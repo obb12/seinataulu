@@ -13,7 +13,7 @@ app.get('/list', function(req, res){
   res.json(JSON.parse(body))
 });
 })
-app.use(express.static(__dirname + '/my-app/build'));
+app.use(express.static(path.join(__dirname, '../app'), { maxAge: 86400000 }));
 let port = process.env.PORT;
 if (port == null || port == "") {
   port = 8080;
